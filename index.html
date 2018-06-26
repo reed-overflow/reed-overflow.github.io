@@ -229,6 +229,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://reed-chan.github.io/2018/06/26/Python note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reed-chan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of a reed">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/Python note/" itemprop="url">Python备忘笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T00:00:00+08:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>在Python中，用<br><code>class XXX():</code><br>定义一个类<br>初始化方法为<br><code>def __init__(self,········):</code><br>Python中的类也有着在OOP中常见的用法</p>
+<h3 id="可变数量的实参"><a href="#可变数量的实参" class="headerlink" title="可变数量的实参"></a>可变数量的实参</h3><p>在定义函数时，可以引入一个字典来实现可变数量的实参<br>例如,对于下面的函数<br><code>def save_info(**user_info):
+    user={}
+    for key,value in user_info.items():
+        user[key] = value
+    return user</code><br>若输入<br><code>save_info(name=&quot;lolita&quot;)</code><br>输出时就为<br><code>{&#39;name&#39;: &#39;lolita&#39;}</code><br>若输入<br><code>save_info(name=&quot;lolita&quot;, age=&quot;15&quot;)</code><br>输出时就为<br><code>{&#39;name&#39;: &#39;lolita&#39;, &#39;age&#39;: &#39;18&#39;}</code></p>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>在Python中import时，可以通过在后面加上as XXX来给引入的模块起别名</p>
+<h3 id="lambda-λ"><a href="#lambda-λ" class="headerlink" title="lambda(λ)"></a>lambda(λ)</h3><p>来自FP(Functional Programming)的概念  </p>
+<p>大体上来说，对于一个简单的输入x,输出x+1的函数  </p>
+<p><code>def fun1(x)
+    x=x+1</code><br>可以写成  </p>
+<p><code>lambda x:x+1</code><br>形式的匿名函数，在一定的情况下简化代码</p>
+<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted"></a>sorted</h3><p>sorted(iterable, /, *, key=None, reverse=False)<br>Return a new list containing all items from the iterable in ascending order.<br>A custom key function can be supplied to customize the sort order, and the reverse flag can be set to request the result in descending order.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://reed-chan.github.io/2018/05/24/Test-Article/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,7 +642,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -523,7 +655,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
