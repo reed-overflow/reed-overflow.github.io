@@ -1,0 +1,141 @@
+/* Static phosphor glow and pixel chrome; no fonts, canvas or render loop. */
+:root {
+  --phosphor-near: color-mix(in srgb, var(--accent) 38%, transparent);
+  --phosphor-far: color-mix(in srgb, var(--accent) 15%, transparent);
+  --phosphor-wash: color-mix(in srgb, var(--accent) 6%, transparent);
+  --pixel-ink: color-mix(in srgb, var(--accent) 12%, transparent);
+  --scanline-ink: #00000018;
+  --title-glow: 0 0 2px color-mix(in srgb, var(--heading) 24%, transparent),
+    0 0 18px var(--phosphor-far), 0 0 40px var(--phosphor-far);
+}
+html[data-theme='light'] {
+  --phosphor-near: color-mix(in srgb, var(--accent) 18%, transparent);
+  --phosphor-far: color-mix(in srgb, var(--accent) 6%, transparent);
+  --phosphor-wash: color-mix(in srgb, var(--accent) 3%, transparent);
+  --pixel-ink: color-mix(in srgb, var(--accent) 9%, transparent);
+  --scanline-ink: #263b2606;
+  --title-glow: 0 0 12px var(--phosphor-far);
+}
+@media (prefers-color-scheme: light) {
+  html[data-theme='auto'] {
+    --phosphor-near: color-mix(in srgb, var(--accent) 18%, transparent);
+    --phosphor-far: color-mix(in srgb, var(--accent) 6%, transparent);
+    --phosphor-wash: color-mix(in srgb, var(--accent) 3%, transparent);
+    --pixel-ink: color-mix(in srgb, var(--accent) 9%, transparent);
+    --scanline-ink: #263b2606;
+    --title-glow: 0 0 12px var(--phosphor-far);
+  }
+}
+
+.with-bloom .site-shell {
+  background-image: radial-gradient(ellipse 75% 340px at 12% 0, var(--phosphor-wash), transparent);
+}
+.with-bloom :is(.brand, .hero h1, .page-heading h1, .article-header h1) {
+  text-shadow: var(--title-glow);
+}
+.with-bloom :is(.brand-symbol, .brand-dot, .prompt-user, .prompt-dollar,
+  .session-path, .session-name > span, .nav-link.active, .heading-dot,
+  .footer-prompt, .read-link, .panel-heading > span:first-child) {
+  text-shadow: 0 0 7px var(--phosphor-near), 0 0 20px var(--phosphor-far);
+}
+.with-bloom :is(.cursor, .tiny-cursor, .reading-progress) {
+  box-shadow: 0 0 6px var(--phosphor-near), 0 0 18px var(--phosphor-near),
+    0 0 32px var(--phosphor-far);
+}
+.with-bloom :is(.nav-link, .read-link, .text-link, .icon-button):hover {
+  text-shadow: 0 0 8px var(--phosphor-near);
+}
+.with-bloom .search-dialog {
+  box-shadow: 0 24px 80px #00000040, 0 0 0 1px var(--phosphor-near),
+    0 0 32px var(--phosphor-far);
+}
+
+/* Texture stays behind the content; it never intercepts input or dims images. */
+.with-pixels .site-shell { position: relative; isolation: isolate; }
+.with-pixels .site-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(to bottom,
+    transparent 0 3px, var(--scanline-ink) 3px 4px);
+}
+.with-pixels.with-grid {
+  background-image: linear-gradient(var(--bg) 6px, transparent 6px),
+    linear-gradient(to right, var(--pixel-ink) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+.with-pixels :is(.hero, .page-heading) {
+  background-image: linear-gradient(to right, var(--pixel-ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pixel-ink) 1px, transparent 1px);
+  background-size: 8px 8px;
+  background-repeat: repeat-x;
+  background-position: left bottom;
+}
+/* An 8 × 8 pixel >_ glyph, drawn with integer steps instead of a font. */
+.with-pixels .brand-symbol {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 24px;
+  font-size: 0;
+  letter-spacing: 0;
+}
+.with-pixels .brand-symbol::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 25% 0, 25% 12.5%, 37.5% 12.5%,
+    37.5% 25%, 50% 25%, 50% 37.5%, 62.5% 37.5%, 62.5% 62.5%,
+    50% 62.5%, 50% 75%, 37.5% 75%, 37.5% 87.5%, 25% 87.5%,
+    25% 100%, 0 100%, 0 75%, 12.5% 75%, 12.5% 62.5%,
+    25% 62.5%, 25% 37.5%, 12.5% 37.5%, 12.5% 25%, 0 25%);
+}
+.with-pixels .brand-symbol::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  height: 6px;
+  background: currentColor;
+}
+.with-pixels.with-bloom .brand-symbol {
+  filter: drop-shadow(0 0 5px var(--phosphor-near));
+}
+.with-pixels .cursor {
+  width: .5em;
+  background-image: repeating-linear-gradient(to bottom,
+    transparent 0 2px, var(--bg) 2px 3px);
+}
+.with-pixels .panel-heading::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  margin-right: 4px;
+  background: var(--accent);
+  box-shadow: 3px 3px 0 var(--pixel-ink);
+}
+.with-pixels :is(.nav-link.active, .page-number.current) {
+  text-decoration: none;
+  background-image: repeating-linear-gradient(to right,
+    var(--accent) 0 3px, transparent 3px 6px);
+  background-size: 100% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+.with-pixels :is(kbd, .back-top) { box-shadow: 2px 2px 0 var(--border); }
+
+@media (prefers-contrast: more), (forced-colors: active) {
+  .with-bloom *, .with-pixels * { text-shadow: none !important; box-shadow: none !important; filter: none !important; }
+  .with-pixels .site-shell::before { display: none; }
+  .with-bloom .site-shell, .with-pixels :is(.hero, .page-heading, .cursor),
+  .with-pixels.with-grid { background-image: none; }
+  .with-pixels :is(.nav-link.active, .page-number.current) { background-image: none; text-decoration: underline; }
+  .with-pixels .brand-symbol::before, .with-pixels .brand-symbol::after,
+  .with-pixels .panel-heading::before { background: CanvasText; }
+}
