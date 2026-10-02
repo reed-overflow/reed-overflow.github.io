@@ -1,0 +1,11 @@
+.site-counter {
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.site-counter img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
